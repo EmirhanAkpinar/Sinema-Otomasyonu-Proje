@@ -44,5 +44,12 @@ namespace Sinema_Otomasyonu2
         {
             Application.Exit();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Salon2 salon2 = new Salon2();
+            salon2.Show();
+            this.Hide();
+        }
     }
 }
