@@ -18,7 +18,7 @@ namespace Sinema_Otomasyonu2
             InitializeComponent();
 
         }
-        SqlConnection baglanti = new SqlConnection("Data Source=5.180.104.138\\MSSQLSERVER2012;Initial Catalog=test;Persist Security Info=True;User ID=emirhan;Password=şifreyazcankankçalamazsın");
+        SqlConnection baglanti = new SqlConnection("Data Source=5.180.104.138\\MSSQLSERVER2012;Initial Catalog=test;Persist Security Info=True;User ID=emirhan;Password=jtZ86c~5");
 
 
         private void Form1_Load(object sender, EventArgs e)
