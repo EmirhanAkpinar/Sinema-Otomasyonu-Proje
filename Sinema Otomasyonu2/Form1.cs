@@ -38,5 +38,11 @@ namespace Sinema_Otomasyonu2
             salon1.Show();
             this.Hide();
         }
+
+
+        private void bunifuImageButton1_Click_1(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

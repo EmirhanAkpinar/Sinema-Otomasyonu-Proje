@@ -26,10 +26,29 @@ namespace Sinema_Otomasyonu2
         SqlDataReader dr;
         int counter;
         int tiklanan;
+
+
+        public void ButtonTransparent(Button btn)
+        {
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.BackColor = Color.Transparent;
+            btn.FlatAppearance.BorderSize = 0;
+            btn.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btn.FlatAppearance.MouseOverBackColor = Color.Transparent;
+        }
+
+
+
+
+
+
+
+
+
         void addbuttons()
         {
-            int button_x = 5;
-            int button_y = 5;
+            int button_x = 8;
+            int button_y = 8;
             baglanti.Open();
             string sorgu = "Select Max(koltukno) From salon1";
             int deger;
@@ -57,21 +76,27 @@ namespace Sinema_Otomasyonu2
                 dr.Read();
                 if (Convert.ToBoolean(dr[1]) == false)
                 {
-                    btn.BackColor = Color.Green; btn.Enabled = true;
+                    btn.BackgroundImage = Image.FromFile(Application.ExecutablePath + @"\..\..\..\images\bos.png");
+                    btn.BackgroundImageLayout = ImageLayout.Zoom;
+                    btn.Enabled = true;
                     comboBox1.Items.Add(i);
                 }
                 else
                 {
-                    btn.BackColor = Color.Red; btn.Enabled = false;
+                    btn.BackgroundImage = Image.FromFile(Application.ExecutablePath + @"\..\..\..\images\dolu.png");
+                    btn.BackgroundImageLayout = ImageLayout.Zoom;
+                    btn.Enabled = false;
                 }
 
                 btn.Text = "" + i;
                 btn.Tag = i;
-                btn.Height = 50;
-                btn.Width = 50;
+                btn.Height = 60;
+                btn.Width = 60;
                 btn.Location = new Point(button_x, button_y);
                 button_x += 60;
                 btn.Name = Convert.ToString(counter);
+                btn.Cursor = Cursors.Hand;
+                ButtonTransparent(btn);
                 panel1.Controls.Add(btn);
 
                 btn.Click += new EventHandler(buttonClick);
@@ -79,8 +104,8 @@ namespace Sinema_Otomasyonu2
                 counter++;
                 if (counter % 10 == 0)
                 {
-                    button_y += 90;
-                    button_x = 5;
+                    button_y += 95;
+                    button_x = 7;
                 }
                 baglanti.Close();
             }
@@ -90,16 +115,52 @@ namespace Sinema_Otomasyonu2
             Button tiklananBtn = (Button)sender;
 
             tiklanan = Convert.ToInt32(tiklananBtn.Tag);
-            
-           
+            comboBox1.SelectedItem = tiklanan;
+
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            comboBox1.Items.Clear();
-            panel1.Controls.Clear();
+    
 
-            addbuttons();
+        private void bunifuButton1_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem != null)
+            {
+                if (bunifuTextBox1.Text != null)
+                {
+                    cmd = new SqlCommand();
+                    baglanti.Open();
+                    cmd.Connection = baglanti;
+                    cmd.CommandText = "update salon1 set koltukdurum=1,satinalan='" + bunifuTextBox1.Text + "' where koltukno=" + comboBox1.SelectedItem + "";
+                    cmd.ExecuteNonQuery();
+                    baglanti.Close();
+
+                    comboBox1.Items.Clear();
+                    panel1.Controls.Clear();
+                    addbuttons();
+                    bunifuTextBox1.Text = null;
+                }
+                else
+                {
+                }
+
+            }
+            else
+            {
+
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuImageButton1_Click(object sender, EventArgs e)
+        {
+            Form1 form1 = new Form1();
+            form1.Show();
+            this.Hide();
         }
     }
 }
