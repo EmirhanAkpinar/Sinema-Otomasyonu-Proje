@@ -51,5 +51,6 @@ namespace Sinema_Otomasyonu2
             salon2.Show();
             this.Hide();
         }
+
     }
 }
